@@ -118,8 +118,8 @@ public class GameController : MonoBehaviour
         GemStart();
         SetCamPosition();
         score = 0;
-        scoreDisp.text = "Score =" + score.ToString();
-        moveCountDisp.text = "0";
+        scoreDisp.text = "Score"+ "\n" + score.ToString();
+        moveCountDisp.text = "Moves" + "\n" + moveCount.ToString(); ;
         if(!isThereAnyMove())
         {
             GameStart();
@@ -239,7 +239,8 @@ public class GameController : MonoBehaviour
                         
                     {
                         score += scorePerGem;
-                        scoreDisp.text = "Score =" + score.ToString();
+                        scoreDisp.text = "Score" + "\n" + score.ToString();
+                        moveCountDisp.text = "Moves" + "\n" + moveCount.ToString(); ;
                     }
                     gemArray[x, y] = farAwayObject;
 
@@ -582,7 +583,8 @@ public class GameController : MonoBehaviour
 
     public void tryAmove(bool isTurnLeft)//starts turn to gems
     {
-        moveCountDisp.text = "Move Count =" + moveCount.ToString();
+        scoreDisp.text = "Score" + "\n" + score.ToString();
+        moveCountDisp.text = "Moves" + "\n" + moveCount.ToString(); ;
         StartCoroutine(turnOrder(isTurnLeft));
         playerCanMove = false;
     }
