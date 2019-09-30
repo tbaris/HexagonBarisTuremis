@@ -21,12 +21,14 @@ public class exitController : MonoBehaviour
     }
     void Update()
     {
-        if ((Input.GetKey(KeyCode.Escape) || quitGame) && !clickedBefore )
+        if ((Input.GetKeyDown(KeyCode.Escape) || quitGame) && !clickedBefore )
         {
             clickedBefore = true;
             quitobject.SetActive(true);
-            StartCoroutine(quitingTimer());
             quitGame = false;
+            StartCoroutine(quitingTimer());
+      
+            
         }
     }
     public void QuitGameButton()
@@ -86,7 +88,7 @@ public class exitController : MonoBehaviour
                 gameCont.GameOver();
                 
                 secondClick = false;
-                Debug.Log("1");
+            
                 
             }
             yield return null;
@@ -96,7 +98,7 @@ public class exitController : MonoBehaviour
            
                 gameCont.GameOver();
            
-            Debug.Log("2");
+      
             isGameOverStarted = true;
           
            
@@ -118,12 +120,15 @@ public class exitController : MonoBehaviour
         const float timerTime = 3f;
         float counter = 0;
 
+   
         while (counter < timerTime)
         {
             counter += Time.deltaTime;
-            if ((Input.GetKey(KeyCode.Escape) || quitGame))
+            if ((Input.GetKeyDown(KeyCode.Escape) || quitGame))
             {
+                quitGame = false;
                 Quit();
+               
             }
             yield return null;
         }
@@ -145,7 +150,7 @@ public class exitController : MonoBehaviour
 
 #if UNITY_ANDROID
         Application.Quit();
-        System.Diagnostics.Process.GetCurrentProcess().Kill();
+      //  System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
     }
 
