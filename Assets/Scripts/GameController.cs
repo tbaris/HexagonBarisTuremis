@@ -592,43 +592,44 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-
-           
-            turnGems(isTurnLeft);
-            getMatched();
-            yield return new WaitForSeconds(0.4f);
-            if (isThereMatchedGems)
+            if (!isGameOver)
             {
-                
-                foreach (GameObject gem in selectedGems)
+                turnGems(isTurnLeft);
+                getMatched();
+                yield return new WaitForSeconds(0.4f);
+                if (isThereMatchedGems)
                 {
-                    gem.GetComponent<GemProps>().toFront = false;
-                    gem.GetComponent<GemProps>().goToSpot();
-                }
-                // DestroyMatchedGems();
-                StartCoroutine(gemDestroyWait());
-                moveCount++;
-                i++;
-                i++;
-                returnBack();
-                bombTick.Invoke();
 
-            }
-            else
-            {
-               
-                if (i==2)
-                {
-                   
-                    returnBack();
-                    
-                    playerCanMove = true;
+                    foreach (GameObject gem in selectedGems)
+                    {
+                        gem.GetComponent<GemProps>().toFront = false;
+                        gem.GetComponent<GemProps>().goToSpot();
+                    }
+                    // DestroyMatchedGems();
+                    StartCoroutine(gemDestroyWait());
                     moveCount++;
+                    i++;
+                    i++;
+                    returnBack();
                     bombTick.Invoke();
-                    checkExploded();
 
                 }
-               
+                else
+                {
+
+                    if (i == 2)
+                    {
+
+                        returnBack();
+
+                        playerCanMove = true;
+                        moveCount++;
+                        bombTick.Invoke();
+                        checkExploded();
+
+                    }
+
+                }
             }
            
         }
